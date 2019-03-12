@@ -1,40 +1,51 @@
-var randomWordArr = ["beer", "wine", "brewery", "pizza", "sushi", "steak", "burger"];
+// Set array of random words
+var randomWord = ["random", "words", "will", "go", "here"];
+// set starting variables
 
-// choose random word from the array
-var randomWord = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
+var numWin = 0;
+var numLose = 0;
+var isFinished = false; //game will restart when becomes true
+var currentWord; //the current word in play
+var maxNumberGuesses = 10;
+var guessesRemaining = 0;
+var guessedLetters = [];
+var answerArray = []; // use "_" to replace letters with underscores
 
-// globals
-var s;
-var count = 0;
-// empty array to store the guesses
-var answerArray = [];
-
-/* fill the answer array with underscores
-the number of underscores matches the letters in the randomly chosen word */
-function startUp() {
-    for (var i = 0; i < randomWord.length; i++) {
+// start the game
+function setup() {
+    currentWord = randomWord[Math.floor(Math.random() * randomWord.length)];
+    answerArray = []; 
+    for (var i = 0; i < currentWord.length; i++) {
         answerArray[i] = "_";
     }
-    // put them in a string
-    s = answerArray.join(" ");
-    document.getElementById("answer").innerHTML = s;
+
+    guessesRemaining = maxNumberGuesses;
+    lettersGuessed = [];
+};
+
+// update html
+function updateText() {
+    document.getElementById("winTotal").innerText = numWin;
+    document.getElementById("lossTotal").innerText = numLose;
+    document.getElementById("remainignGuesses").innerText  = guessesRemaining;
+    document.getElementById("currentWord").innerText = currentWord;
+    document.getElementById("lettersGuessed").innerText = guessedLetters;
+    )
 }
 
-function Letter() {
-    var letter = document.getElementById("letter").nodeValue;
+// What key is pressed
 
-    if (letter.length > 0) {
-        for (var i = 0; i < randomWord.length; i++) {
-            if (randomWord[i] === letter) {
-                answerArray[i] = letter;
+function checkLetter(letter) {
+    if (guessedLetters.indexOf(letter) === -1) {
+        guessedLetters.push(letter);
+        if (currentWord.indexOf(letter) === -1) {
+            guessesRemaining--;
+        } else {
+            for (var i = 0; i < currentWord.length; i++) {
+                if (letter === currentWord[i]) {
+                    answerArray[i] = letter;
+                }
             }
         }
-        // here is how many times it takes to guess
-        count++;
-        document.getElementById("counter").innerHTML = "No of clicks: " + count;
-        document.getElementById("answer").innerHTML = answerArray.join(" ");
     }
-    if (counts > 5) {
-        document.getElementById("stat").innerHTML = "Come on... you should've guessed it by now!";
-    }
-}
+};
