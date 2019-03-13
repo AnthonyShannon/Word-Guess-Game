@@ -4,31 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Word Guess</title>
+    <title>Guitar Brand Word Guess</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    
+
     <div class="container">
         <h1>Word Guess Game!</h1>
-        <h6>Press any key to start!</h6>
 
-        <h3>Wins</h3>
-        <div id="winTotal"></div>
-        <h3>Losses</h3>
-        <div id="lossTotal"></div>
-        <h3>Current Word</h3>
-        <div id="currentWord"></div>
-        <h3>Remaining guesses</h3>
-        <div id="remainingGuesses"></div>
-        <h3>Letters Guessed</h3>
-        <div id="lettersGuessed"></div>
+        <h2 id="message">Hello Player</h2>
+        <p id="instructions">Press any key to start</p>
+        
+            <div id="key" value="">
+        </div>
+       
+        <p id="userAnswer">_START_</p>
+        <p id="userGuess">You Guessed: </p>
+        <br>
+        <h3>Score Board</h3>
+            <h5>Win: <span id="win">0</span></h5>
+            <h5>Lose: <span id="lose">0</span></h5>
+            <h5>Tries Left: <span id="tries">10</span></h5>
     </div>
 
 
 
     <!-- Script -->
     <script src="assets/javascript/game.js"></script>
+  
 </body>
 </html>
