@@ -28,8 +28,8 @@ var guessGame = {
         this.wrongGuess = [];
         this.rightGuess = [];
         this.displayWord = [];
-        var ranNum = Math.floor(Math.random() * this.guitarBrands.length)
-        this.answers = this.guitarBrands[ranNum];
+        var wordSelect = Math.floor(Math.random() * this.guitarBrands.length)
+        this.answers = this.guitarBrands[wordSelect];
         this.displayWordBlank();
         userGuess.textContent = "You already guessed: ";
         message.textContent = "Which guitar company am I thinking of?";
@@ -118,7 +118,7 @@ document.onkeyup = function(event){
             if (isInWord(inputUpper) && (guessGame.rightGuess.indexOf(inputUpper)==-1)){
                 guessGame.previousGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
-                
+                               
                 if(checkAnswer()){
                     guessGame.winCount++;
                     userWins.textContent = guessGame.winCount;
