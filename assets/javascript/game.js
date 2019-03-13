@@ -28,19 +28,16 @@ var guessGame = {
         this.wrongGuess = [];
         this.rightGuess = [];
         this.displayWord = [];
-
         var ranNum = Math.floor(Math.random() * this.guitarBrands.length)
         this.answers = this.guitarBrands[ranNum];
-        
         this.displayWordBlank();
-
         userGuess.textContent = "You already guessed: ";
-        message.textContent = "Which guitar do you play?";
+        message.textContent = "Which guitar company am I thinking of?";
         userTries.textContent = this.triesLeft;
         keyHit.value = ""; 
     },
 
-    pastGuess: function(letter, state) {
+    previousGuess: function(letter, state) {
         
         if (state == 1){
             this.rightGuess.push(letter);
@@ -119,7 +116,7 @@ document.onkeyup = function(event){
         if(isAlpha(inputCode)){
             var inputUpper = userInput.toUpperCase();
             if (isInWord(inputUpper) && (guessGame.rightGuess.indexOf(inputUpper)==-1)){
-                guessGame.pastGuess(inputUpper, 1);
+                guessGame.previousGuess(inputUpper, 1);
                 replaceBlank(inputUpper);
                 
                 if(checkAnswer()){
@@ -130,7 +127,7 @@ document.onkeyup = function(event){
                 }
             }
             else if ((guessGame.wrongGuess.indexOf(inputUpper)==-1) && (guessGame.rightGuess.indexOf(inputUpper)==-1)){
-                guessGame.pastGuess(inputUpper, 2);
+                guessGame.previousGuess(inputUpper, 2);
                 guessGame.triesLeft--;
 
                 if(guessGame.triesLeft == 0){
@@ -145,11 +142,10 @@ document.onkeyup = function(event){
             alert("Only press letters!");
             keyHit.value = "";
         }
-
     }
     else{
-        guessGame.gameReset();
         guessGame.loseCount++;
+        guessGame.gameReset();
         userLoss.textContent = guessGame.loseCount;
     }
 }
